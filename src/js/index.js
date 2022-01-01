@@ -22,6 +22,16 @@ step1. 요구사항 구현을 위한 전략
 const $ = (selector) => document.querySelector(selector); 
 
 function App(){
+
+    // 메뉴 수정 시 menu-list에 아직 자식이 추가되지 않았음으로 이벤트 위임을 통해 전달함
+    $("#espresso-menu-list").addEventListener("click", (e) => {
+      if(e.target.classList.contains("menu-edit-button")){
+        const menuName = e.target.closest("li").querySelector(".menu-name");
+        const updatedMenuName = prompt("메뉴명을 수정하세요",menuName.innerText);
+        menuName.innerText = updatedMenuName;
+
+      }
+    });
     // form 태그 submit 시 새로고침되는 거 막아줌
     $("#espresso-menu-form").addEventListener("submit", e =>{
         e.preventDefault();
